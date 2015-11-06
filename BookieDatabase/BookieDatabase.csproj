@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B2E3366F-1F56-412D-951B-BE6013C47F77}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BookieDatabase</RootNamespace>
+    <AssemblyName>BookieDatabase</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BookieCotext.cs" />
+    <Compile Include="Matches.cs" />
+    <Compile Include="Migrations\201510121148494_Gm.cs" />
+    <Compile Include="Migrations\201510121148494_Gm.Designer.cs">
+      <DependentUpon>201510121148494_Gm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510121437350_result.cs" />
+    <Compile Include="Migrations\201510121437350_result.Designer.cs">
+      <DependentUpon>201510121437350_result.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510121529515_nullable results.cs" />
+    <Compile Include="Migrations\201510121529515_nullable results.Designer.cs">
+      <DependentUpon>201510121529515_nullable results.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510121804230_close match.cs" />
+    <Compile Include="Migrations\201510121804230_close match.Designer.cs">
+      <DependentUpon>201510121804230_close match.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510121832021_userResults.cs" />
+    <Compile Include="Migrations\201510121832021_userResults.Designer.cs">
+      <DependentUpon>201510121832021_userResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510141334221_emails.cs" />
+    <Compile Include="Migrations\201510141334221_emails.Designer.cs">
+      <DependentUpon>201510141334221_emails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510191345526_GivenMoneyByBookie and Match time .cs" />
+    <Compile Include="Migrations\201510191345526_GivenMoneyByBookie and Match time .Designer.cs">
+      <DependentUpon>201510191345526_GivenMoneyByBookie and Match time .cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserResult.cs" />
+    <Compile Include="Users.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201510121148494_Gm.resx">
+      <DependentUpon>201510121148494_Gm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510121437350_result.resx">
+      <DependentUpon>201510121437350_result.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510121529515_nullable results.resx">
+      <DependentUpon>201510121529515_nullable results.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510121804230_close match.resx">
+      <DependentUpon>201510121804230_close match.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510121832021_userResults.resx">
+      <DependentUpon>201510121832021_userResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510141334221_emails.resx">
+      <DependentUpon>201510141334221_emails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510191345526_GivenMoneyByBookie and Match time .resx">
+      <DependentUpon>201510191345526_GivenMoneyByBookie and Match time .cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

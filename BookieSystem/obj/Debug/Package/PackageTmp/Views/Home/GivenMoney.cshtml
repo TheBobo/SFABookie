@@ -1,0 +1,18 @@
+﻿@model BookieDatabase.UserResult
+@{
+    ViewBag.Title = "Vote";
+}
+
+<h2>Vote</h2>
+
+@using (Html.BeginForm()){
+  <span> @ViewBag.match.Home : @ViewBag.match.Away</span>
+    <p>?? :: ??</p>
+    @Html.HiddenFor(m=>m.Id)
+    @Html.HiddenFor(m => m.UserId)
+    @Html.HiddenFor(m=>m.MatchId)
+    <span> Given money: @Html.CheckBoxFor(m=>m.GivenMoney)</span>
+    <p>
+        <input type="submit" value="submit" />
+    </p>
+}

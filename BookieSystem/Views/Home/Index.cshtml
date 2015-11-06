@@ -1,0 +1,179 @@
+﻿@model List<BookieDatabase.Matches>
+@{
+    ViewBag.Title = "Home Page";
+    List<BookieDatabase.Matches> allMatches=ViewBag.allMatches;
+    List<BookieDatabase.Users> allUsers= ViewBag.allUsers;
+    List<BookieDatabase.UserResult> allResult= ViewBag.allResult;
+    List<BookieDatabase.Matches> activeMaches = ViewBag.activeMaches;
+    bool isAdmin = ViewBag.isAdmin;
+    int userId = ViewBag.userId;
+     
+     
+}
+<span></span>
+@if(ViewBag.emails!=null){
+    <a href="/Account/SendEmail">
+        @if(!ViewBag.emails){
+            <text> Turn Off</text>
+        }
+        else
+        {
+            <text>Turn on</text>
+        }
+    </a> <span>Email confirmation when you submit result (only if you confirm your result)</span>
+}
+
+@*
+<table>
+    <tr>
+        <td>
+            Мач
+        </td>
+        <td>
+            Към Залози
+        </td>
+        
+    </tr>
+        @foreach (var match in activeMaches)
+        {
+            <tr>
+                <td> @match.Home - @match.Away</td>
+                <td><a href="home/bet/@match.Id">Към Мача</a></td>
+            </tr>
+            
+        }
+</table>
+*@
+<a href="/home/ActiveMatches">Активни мачове</a>
+<hr />
+
+
+
+<table>
+      <tr>
+    <td>Match:</td>
+    <td>Close:</td>
+    <td>Result:</td>
+    @foreach (BookieDatabase.Users user in allUsers)
+	{
+        string userName = user.Username.Split('@')[0];
+		 <td>@userName</td>
+	}
+    </tr>
+
+@foreach (BookieDatabase.Matches match in allMatches)
+{
+    <tr>
+        @{
+              var currentUser =  allResult.FirstOrDefault(x => x.MatchId == match.Id && x.UserId == userId);
+              }
+    <td>
+      @match.Home - @match.Away
+    </td>
+    <td>
+       @* @if (isAdmin)
+        {
+            <a href="home/close/@match.Id">
+                @if (match.Close)
+	            {
+		             <text>Open</text>
+	            }
+                else
+                {
+                    <text>Close</text>
+                }
+            </a>
+        }
+        else
+        {*@
+                @if (match.Close)
+	            {
+		             <text>Close</text>
+	            }
+                else
+                {
+                    <text>Open</text>
+                }
+        @*}*@
+    </td>
+    <td>
+       @if(isAdmin){
+       <a href ="home/resultMatch/@match.Id"><span>@match.HomeResult : @match.AwayResult</span></a>
+       }
+        else{
+       <span>@match.HomeResult : @match.AwayResult</span>
+        }
+    </td>
+    @foreach (BookieDatabase.Users user in allUsers)
+	{
+        var hasResult = allResult.FirstOrDefault(x => x.MatchId == match.Id && x.UserId == user.Id);
+        string winner = "lightgrey";
+        if (hasResult != null && match.HomeResult!= null && match.HomeResult == hasResult.Home && match.AwayResult == hasResult.Away)
+        {
+            winner = "lightgreen";
+        }
+              
+		 <td style="background:@winner">
+        @if (isAdmin == true )
+        {
+            string url = "home/givenMoney";
+            if (hasResult != null)
+            {
+                url = url + "/" + hasResult.Id+"?userId="+user.Id+"&matchId="+match.Id;
+            }
+            else{
+                url = url +"?userId="+user.Id+"&matchId="+match.Id;
+            }
+            <a href="@url">
+                  @if (hasResult!=null && User.Identity.IsAuthenticated && currentUser != null)
+	             {
+		             if (hasResult.Home != null){<text>@hasResult.Home : @hasResult.Away</text>}else{<text>:</text>}
+                     <text>paid:</text>  <input type="checkbox" checked="@hasResult.GivenMoney"  disabled="disabled"/>
+	             }
+                 else if (hasResult!=null ){
+                     <text>-</text>
+                       <input type="checkbox" checked="@hasResult.GivenMoney"  disabled="disabled"/>
+                 }
+                 else if (hasResult!=null && hasResult.Home == null && hasResult.Away == null ){
+                     <text>:</text>
+                 }
+                 else{
+                    <text>-</text>
+                 }
+            </a>
+        }
+        else{
+            
+         if ((hasResult!=null && User.Identity.IsAuthenticated && currentUser != null && currentUser.ComfirmResult) || match.Close)
+	             {
+		            if (hasResult!=null && (hasResult.Home != null || match.Close == true))
+                    {
+                        <text >@hasResult.Home : @hasResult.Away</text>}
+                    
+                    else if (hasResult!=null && hasResult.Home != null)
+                    {
+                        <text>:</text>
+                    }
+                    else{
+                        <text>-</text>
+                    }
+	             }
+                 else if (hasResult!=null && User.Identity.IsAuthenticated && currentUser != null && hasResult.UserId == currentUser.UserId)
+	             {
+                      <text>@hasResult.Home : @hasResult.Away</text>
+                 }
+                 else if (hasResult==null ){
+                     <text></text>
+                 }
+                 else{
+                    <text>:</text>
+                 }
+            }
+		 </td>
+    
+	}
+    </tr>
+}
+
+</table>
+

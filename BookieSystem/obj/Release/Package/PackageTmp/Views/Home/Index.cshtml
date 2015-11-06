@@ -1,0 +1,51 @@
+﻿@model List<BookieDatabase.Matches>
+@{
+    ViewBag.Title = "Home Page";
+    List<BookieDatabase.Matches> allMatches=ViewBag.allMatches;
+    List<BookieDatabase.Users> allUsers= ViewBag.allUsers;
+    List<BookieDatabase.UserResult> allResult= ViewBag.allResult;
+    var userId = 0; 
+    if (User.Identity.IsAuthenticated)
+     {
+        userId = ViewBag.userId;
+     }
+     
+}
+
+<table>
+      <tr>
+    <td></td>
+    @foreach (BookieDatabase.Users user in allUsers)
+	{
+        string userName = user.Username.Split('@')[0];
+		 <td>@userName</td>
+	}
+    </tr>
+@foreach (BookieDatabase.Matches match in allMatches)
+{
+        var currentUser =  allResult.FirstOrDefault(x => x.MatchId == match.Id && x.UserId == userId);
+    <tr>
+    <td>
+       <a href="/Home/Vote/@match.Id" >@match.Home - @match.Away</a>
+    </td>
+    @foreach (BookieDatabase.Users user in allUsers)
+	{
+		 <td>
+             @{
+             var hasResult = allResult.FirstOrDefault(x => x.MatchId == match.Id && x.UserId == user.Id);
+             }
+             <span></span>
+             @if (hasResult!=null && User.Identity.IsAuthenticated && currentUser != null)
+	         {
+		         <text>@hasResult.Home - @hasResult.Away</text>
+	         }
+             else{
+                <text>:</text>
+             }
+		 </td>
+	}
+    </tr>
+}
+
+</table>
+

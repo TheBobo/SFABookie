@@ -1,0 +1,17 @@
+﻿@model BookieDatabase.Matches
+@{
+    ViewBag.Title = "ResultMatch";
+}
+
+<h2>ResultMatch</h2>
+
+
+
+@using (Html.BeginForm()){
+    <label>@Model.Home</label>
+    @Html.TextAreaFor(m=>m.HomeResult)
+    
+    <label>@Model.Away</label>
+    @Html.TextAreaFor(m=>m.AwayResult)
+    <input type="submit" value="submit" />
+}

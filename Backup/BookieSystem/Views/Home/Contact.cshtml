@@ -1,0 +1,18 @@
+﻿@model BookieDatabase.Matches
+@{
+    ViewBag.Title = "Contact";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+@using (Html.BeginForm()){
+    @Html.LabelFor(m=>m.Home)
+    @Html.TextBoxFor(m => m.Home)
+
+    @Html.LabelFor(m => m.Away)
+    @Html.TextBoxFor(m => m.Away)
+    <input type="submit" value="Create Match" />
+}

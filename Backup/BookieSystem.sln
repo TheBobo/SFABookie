@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookieSystem", "BookieSystem\BookieSystem.csproj", "{EEA0FBF9-969B-45A8-A683-A41CE56E518B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookieDatabase", "BookieDatabase\BookieDatabase.csproj", "{B2E3366F-1F56-412D-951B-BE6013C47F77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEA0FBF9-969B-45A8-A683-A41CE56E518B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEA0FBF9-969B-45A8-A683-A41CE56E518B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEA0FBF9-969B-45A8-A683-A41CE56E518B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEA0FBF9-969B-45A8-A683-A41CE56E518B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2E3366F-1F56-412D-951B-BE6013C47F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2E3366F-1F56-412D-951B-BE6013C47F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2E3366F-1F56-412D-951B-BE6013C47F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2E3366F-1F56-412D-951B-BE6013C47F77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

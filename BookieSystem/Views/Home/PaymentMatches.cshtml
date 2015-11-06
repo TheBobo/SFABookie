@@ -1,0 +1,175 @@
+﻿
+@{
+    ViewBag.Title = "ActiveMachers";
+    List<BookieDatabase.Users> users = ViewBag.users;
+    List<BookieDatabase.Matches> matches = ViewBag.matches;
+    BookieDatabase.Users currentUser = users.First(x => x.Username == User.Identity.Name);
+    bool isAdmin = ViewBag.isAdmin;
+    bool notPaid = true;
+}
+
+<table>
+    <tr>
+        <td></td>
+        @foreach (var match in matches)
+        {
+            <td>@match.Home - @match.Away
+                <p>@match.TimeToBet</p>
+            </td>
+        }
+    </tr>
+
+            <tr>
+            <td>@users[0].Username.Split('@')[0]</td>
+        @foreach (var match in matches)
+        {
+          var currentTd = users[0].UserResults.FirstOrDefault(x=>x.MatchId == match.Id);
+                      
+        
+          
+          //if (currentTd.GivenMoney || currentTd.GivenMoneyByBookie) 
+             // notPaid = false;
+         <td>
+      
+          @if (currentTd == null)
+          {
+              <a href="/home/vote/@match.Id">Заложи</a>
+          }
+          else{
+              if (currentUser.UserResults.FirstOrDefault(x=>x.MatchId == match.Id && x.ComfirmResult) != null)
+              {
+                  <text>@currentTd.Home : @currentTd.Away</text>
+              }
+              else{
+                <a href="/home/vote/@match.Id" title="непотвърден">@currentTd.Home : @currentTd.Away</a> 
+              }
+          }
+      @if (isAdmin )
+           {
+
+               if (currentTd != null)
+               {
+                 string background = "white";
+                 if (currentTd.GivenMoney)
+                 {
+                     background = "yellow";
+                 }
+                 else
+                 {
+                     background = "white";
+                 }
+                 <a href="/home/givenMoney/@currentTd.Id?userId=@currentTd.UserId&matchId=@currentTd.MatchId" title="платил" style="background-color:@background">П</a>  
+                   if (currentTd.GivenMoneyByBookie)
+                   {
+                       background = "yellow";
+                   }
+                   else
+                   {
+                       background = "white";
+                   }
+                 <a href="/home/givenMoneyBookie/@currentTd.Id?userId=@currentTd.UserId&matchId=@currentTd.MatchId" title="боокие платило" style="background-color:@background">Б</a>
+                   if (!currentTd.GivenMoney && !currentTd.GivenMoneyByBookie)
+                   {
+                       background = "yellow";
+                   }
+                   else
+                   {
+                       background = "white";
+                   }
+                 <a href="/home/notPaid/@currentTd.Id?userId=@currentTd.UserId&matchId=@currentTd.MatchId" title="не платил"  style="background-color:'@background'">Н</a>      
+      }
+               else{
+                   @*
+                 <a href="/home/givenMoney/?userId=@users[0].Id&matchId=@match.Id" title="платил">П</a>  
+                 <a href="/home/givenMoneyBookie/?userId=@users[0].Idd&matchId=@match.Id" title="боокие платило">Б</a>
+                 <a href="#" title="не платил">Н</a>*@
+               }
+               
+                
+           }
+
+
+        </td>
+            
+        }
+
+        </tr>
+
+    @for (int i = 1; i < users.Count; i++)
+    {
+
+        <tr>
+            <td>@users[i].Username.Split('@')[0]</td>
+        @foreach (var match in matches)
+        {
+          var currentTd = users[i].UserResults.FirstOrDefault(x=>x.MatchId == match.Id);
+          <td>
+            @if (currentTd == null)
+          {
+              <text></text>
+          }
+          else{
+              if (currentUser.UserResults.FirstOrDefault(x=>x.MatchId == match.Id && x.ComfirmResult) != null)
+              {
+                  <text>@currentTd.Home : @currentTd.Away</text>
+              }
+              else{
+                <text>:</text>
+              }
+          }
+        @if (isAdmin )
+           {
+             
+               if (currentTd != null)
+               {
+                   
+            
+                 string background = "white";
+                 if (currentTd.GivenMoney)
+                 {
+                     background = "yellow";
+                 }
+                 else
+                 {
+                     background = "white";
+                 }
+                   <a href="/home/givenMoney/@currentTd.Id?userId=@currentTd.UserId&matchId=@currentTd.MatchId" title="платил" style="background-color:@background">П</a>  
+                 
+                   if (currentTd.GivenMoneyByBookie)
+                   {
+                       background = "yellow";
+                   }
+                   else
+                   {
+                       background = "white";
+                   }
+                  <a href="/home/givenMoneyBookie/@currentTd.Id?userId=@users[i].Id&matchId=@match.Id" title="боокие платило" style="background-color:@background">Б</a>
+                   
+                   if (!currentTd.GivenMoney && !currentTd.GivenMoneyByBookie)
+                   {
+                       background = "yellow";
+                   }
+                   else
+                   {
+                       background = "white";
+                   }
+              
+                
+                 <a href="/home/notPaid/@currentTd.Id?userId=@currentTd.UserId&matchId=@currentTd.MatchId" title="не платил" style="background-color:@background">Н</a>
+                }
+               else{
+                 <a href="/home/givenMoney/?userId=@users[i].Id&matchId=@match.Id" title="платил">П</a> 
+                 <a href="/home/givenMoneyBookie/?userId=@users[i].Id&matchId=@match.Id" title="боокие платило">Б</a>
+                 <a href="#" title="не платил" style="background-color:yellow">Н</a>
+               }
+           
+              
+           }
+              </td>
+            
+        }
+
+        </tr>
+    }
+ 
+</table>

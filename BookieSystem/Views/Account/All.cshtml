@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "All";
+    List<BookieDatabase.Users> users = ViewBag.users;
+    }
+<h2>All</h2>
+    
+    @foreach (BookieDatabase.Users user in users)
+    {
+        <p>@user.Username -> @user.Password</p>
+    }

@@ -1,0 +1,26 @@
+﻿@model BookieDatabase.UserResult
+@{
+    ViewBag.Title = "Vote";
+    BookieDatabase.Matches match = ViewBag.match;
+}
+
+<h2>Vote</h2>
+@if (Model.ComfirmResult)
+{   
+    <p>Result is confirmed you result</p>
+}
+else{
+    using (Html.BeginForm()){
+        @Html.HiddenFor(m => m.MatchId);
+        <label>@match.Home</label>
+        @Html.TextBoxFor(m => m.Home)
+
+        <label>@match.Away</label>
+        @Html.TextBoxFor(m => m.Away)
+
+         <label>Confirm Result: @Html.CheckBoxFor(m => m.ComfirmResult)</label>
+        <p>
+             <input type="submit" value="submit" />
+        </p>
+    }
+}
